@@ -1,0 +1,62 @@
+package ducquan.id.vn.myregister
+
+import android.graphics.Color
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.Toast
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Các view đang có
+        val editFirstName = findViewById<EditText>(R.id.editfirstName)
+        val editLastName = findViewById<EditText>(R.id.editlastName)
+        val isMale = findViewById<CheckBox>(R.id.isMale)
+        val isFemale = findViewById<CheckBox>(R.id.isFemale)
+        val birthday = findViewById<EditText>(R.id.editTextDate)
+        val address = findViewById<EditText>(R.id.editAddress)
+        val email = findViewById<EditText>(R.id.editEmail)
+        val isAgree = findViewById<CheckBox>(R.id.isAgree)
+
+        // Nút Register
+        val register: Button = findViewById(R.id.register)
+
+        // Xử lí checkbox giới tính
+        isMale.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isMale.isChecked)
+                isFemale.isChecked = false
+        }
+        isFemale.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isFemale.isChecked)
+                isMale.isChecked = false
+        }
+
+        // Xử lí nút Register
+        register.setOnClickListener {
+            var toastText = "Successful!"
+            if (!isAgree.isChecked)                         toastText = "Agree to Terms please!"
+            if (email.text.toString() == "")                toastText = "Enter your Email!"
+            if (address.text.toString() == "")              toastText = "Enter your Address!"
+            if (birthday.text.toString() == "")             toastText = "Enter your Birthday!"
+            if (!isMale.isChecked && !isFemale.isChecked)   toastText = "Select your gender!"
+            if (editLastName.text.toString() == "")         toastText = "Enter your Last Name!"
+            if (editFirstName.text.toString() == "")        toastText = "Enter your First Name!"
+
+            Toast.makeText(this, toastText, Toast.LENGTH_SHORT).show()
+        }
+
+
+
+
+
+    }
+}
+Viết cho Nguyễn Đức Quân
